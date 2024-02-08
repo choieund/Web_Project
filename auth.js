@@ -3,6 +3,7 @@ var router = express.Router();
 
 var template = require('./tamplate.js');
 var db = require('./Mysql.js');
+const e = require("express");
 
 router.get('/login', function(request, response){
     var title = '로그인';
@@ -62,3 +63,32 @@ router.get('/register', function(req,res) {
 });
 
 
+router.post('/register_process', function(req,res){
+    var uesrname = req.body.username;
+    var password = req.body.pwd;
+    var password2 = req.body.pwd2;
+
+    if(username && password && password2) {
+        db.query('SELECT * FROM usertable WHERE username = ?', [username], function(err, results, fields) {
+            if(err) throw err;
+            if(results.length <= 0 && password == passwrod2){
+                db.query('INSERT INTO usertable(username, password) VALUES(?,?)', [username, password], function(err,data){
+                    if(err) throw err2;
+                    res.end(`<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다.");
+                    document.location.href="/auth/register";</script>`);
+                });
+            } else if(password != password2){
+                res.send(`<script type="text/javascript">alert("입력된 비밀번호가 서로 다릅니다.");
+                document.loaction.href="/auth/register";</script>`);
+            } else {
+                res.send(`<script type="text/javascript">alert("이미 존재하는 아이디입니다.");
+                document.location.href="/auth/register";</script>`);
+            }
+        });
+    } else {
+        res.send(`<script type="text/javascript>alert("입력되지 않은 정보가 있습니다.");
+        document.location.href="/auth/register";</script>`);
+    }
+});
+
+module.exports = router;
