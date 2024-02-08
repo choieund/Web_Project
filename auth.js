@@ -9,8 +9,8 @@ router.get('/login', function(request, response){
     var html = template.HTML(title,
         `<h2>로그인</h2>
         <form action="/auth/login_process" method="post">
-        <p><input class="login" type="text" name="Id" placeholder="아이디"></p>
-        <p><input class="login" type="text" name="password" placeholder="비밀번호"></p>
+        <p><input class="login" type="text" name="username" placeholder="아이디"></p>
+        <p><input class="login" type="password" name="password" placeholder="비밀번호"></p>
         <p><input class="button" type="submit" value="로그인"></p>
         </form>
         <p>계정이 없으신가요? <a herf="/auth/register">회원가입</a></p>`,'');
@@ -45,3 +45,20 @@ router.get('/logout', function(req, res){
         res.redirect('/');
     });
 });
+
+
+router.get('/register', function(req,res) {
+    var title="회원가입";
+    var html = template.HTML(title,`
+    <h2>회원가입</h2>
+    <form action="/auth/register_process" method="post">
+    <p><input class="login" type="text" name="username" placeholder="아이디"></p>
+    <p><input class="login" type="password" name="pwd" placeholder="비밀번호></p>
+    <p><input class="login" type="password" name="pwd2" placeholder="비밀번호 재확인"></p>
+    <p><input class="button" type="submit" value="제출"></p>
+    </form>
+    <p><a herf="/auth/login">로그인화면으로 돌아가기</a></p>`, '');
+    res.send(html);
+});
+
+
