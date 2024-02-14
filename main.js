@@ -3,9 +3,9 @@ const morgan = require("morgan");
 const session = require("express-session");
 const FileStore = require("session-file-store")
 
-var authRouter = require('./auth.js');
-var authCheck = require('./authCheck.js');
-var template = require('./template.js');
+var authRouter = require('./lib_login/auth.js');
+var authCheck = require('./lib_login/authCheck.js');
+var template = require('./lib_login/template.js');
 
 const app = express();
 
