@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 var template = require('./tamplate.js');
-var db = require('./Mysql.js');
+var db = require('../Mysql.js');
 const e = require("express");
 
 router.get('/login', function(request, response){
