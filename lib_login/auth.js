@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-var template = require('./tamplate.js');
+var template = require('./template.js');
 var db = require('../Mysql.js');
 const e = require("express");
 
