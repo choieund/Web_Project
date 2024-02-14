@@ -1,4 +1,4 @@
-var meysql = require('mysql2');
+var meysql = require('mysql');
 var db = meysql.createConnection({
     host: 'localhost',
     user: 'eunhee',
