@@ -1,7 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const session = require("express-session");
-const FileStore = require("session-file-store")
+const FileStore = require("session-file-store")(session)
 
 var authRouter = require('./lib_login/auth.js');
 var authCheck = require('./lib_login/authCheck.js');
@@ -15,6 +15,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(
+    session({
+        secret: 'your-secret-key',
+        resave: false,
+        saveUninitialized: true,
+        store: new FileStore(),
+        cookie: {secure: true},
+    })
+)
+
 
 
 app.get('/', async(req, res)=> {
@@ -46,6 +56,6 @@ app.get('/main',(req,res)=>{
 });
 
 
-app.listen(app.get('port'),()=>{
-    console.log(`listening on port ${port}`);
+app.listen(app.get('port'), () => {
+    console.log(`포트 ${app.get('port')}에서 서버가 동작 중입니다.`);
 });
