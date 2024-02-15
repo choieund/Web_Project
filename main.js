@@ -27,13 +27,12 @@ app.use(
 
 
 
-app.get('/', async(req, res)=> {
+app.get('/', (req, res) => {
     if(!authCheck.islogined(req, res)) {
         res.redirect('/auth/login');
         return false;
     } else {
         res.redirect('/main');
-        return false;
     }
 });
 
@@ -44,15 +43,15 @@ app.get('/main',(req,res)=>{
     if(!authCheck.islogined(req,res)) {
         res.redirect('/auth/login');
         return false;
-    } 
-    var html = template.HTML('Welcome',
-     `<hr>
-        <h2>메인 페이지에 오신 것을 환영합니다</h2>
-        <p>로그인에 성공하였습니다.</p>`,
-    authCheck.statusUI(req,res)
-    );
-    res.send(html);
+    } else {
+        var html = template.HTML('Welcome',
+         `<hr>
+           <h2>메인 페이지에 오신 것을 환영합니다.</h2>
+           <p>로그인에 성공하였습니다.</p>`, authCheck.statusUI(req, res));
+        res.send(html);
+    }
     
+   
 });
 
 
