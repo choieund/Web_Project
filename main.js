@@ -28,7 +28,7 @@ app.use(
 
 
 app.get('/', async(req, res)=> {
-    if(!authCheck.isfalse(req, res)) {
+    if(!authCheck.islogined(req, res)) {
         res.redirect('/auth/login');
         return false;
     } else {
@@ -41,7 +41,7 @@ app.get('/', async(req, res)=> {
 app.use('/auth',authRouter);
 
 app.get('/main',(req,res)=>{
-    if(!authCheck.isfalse(req,res)) {
+    if(!authCheck.islogined(req,res)) {
         res.redirect('/auth/login');
         return false;
     } 
