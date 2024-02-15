@@ -15,9 +15,10 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+//session 생성
 app.use(
     session({
-        secret: 'your-secret-key',
+        secret: 'secret-key',
         resave: false,
         saveUninitialized: true,
         store: new FileStore(),
@@ -43,13 +44,12 @@ app.get('/main',(req,res)=>{
     if(!authCheck.islogined(req,res)) {
         res.redirect('/auth/login');
         return false;
-    } else {
-        var html = template.HTML('Welcome',
-         `<hr>
-           <h2>메인 페이지에 오신 것을 환영합니다.</h2>
-           <p>로그인에 성공하였습니다.</p>`, authCheck.statusUI(req, res));
-        res.send(html);
-    }
+    } 
+    var html = template.HTML('Welcome',
+    `<hr>
+        <h2>메인 페이지에 오신 것을 환영합니다.</h2>
+        <p>로그인에 성공하였습니다.</p>`, authCheck.statusUI(req, res));
+    res.send(html);
     
    
 });

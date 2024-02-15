@@ -1,9 +1,9 @@
 module.exports = {
     islogined: function(req, res) {
         if(req.session.is_logined){
-            return true;
+            req.session.is_logined = true;
         } else {
-            return false;
+            req.session.is_logined = false;
         }
     },
 
